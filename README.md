@@ -21,6 +21,86 @@
 }
 ```
 
+### Шаблон панели блоков
+
+Шаблоны блоков записываются в поле `block_templates` которое является объектом.
+
+У шаблонов есть 2 обязательных поля - `name`, `block_fields`.
+
+**name** - имя блока
+
+**block_fields** - поля блока
+
+У полей блоков могут быть поля `name`, `kind`, `block_field_options`.
+
+**name** - имя поля
+
+**kind** - тип поля
+
+**block_field_options** - список опций селекта
+
+Типы полей:
+
+- `text` - Текст
+
+- `rich_text` - HTML
+
+- `account_file` - Файл
+
+- `collection_list` - Список категорий
+
+- `collection` - Категория
+
+- `select` - Выпадающий список
+
+- `checkbox` - Чекбокс
+
+Структура:
+
+```JSON
+{
+  "block_templates": {
+    "slider-block": {
+      "name": "Слайдер",
+      "block_fields": {
+        "link": {
+          "name": "Ссылка",
+          "kind": "text"
+        },
+        "description": {
+          "name": "Контент",
+          "kind": "rich_text"
+        },
+        "heading": {
+          "name": "Заголовок",
+          "kind": "text"
+        },
+        "collection": {
+          "name": "Категория",
+          "kind": "collection"
+        },
+        "image": {
+          "name": "Изображения",
+          "kind": "account_file"
+        },
+        "hide_heading": {
+          "name": "Скрыть заголовок?",
+          "kind": "checkbox"
+        },
+        "side": {
+          "kind" : "select",
+          "name" : "Расположение изображения",
+          "block_field_options": {
+            "is-right": "Справа",
+            "is-left": "Слева"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ### Панели блоков
 
 Задается идентификатор и название каждой панели блоков. Можно также задать идентификаторы блоков, которые надо добавить на панель.
