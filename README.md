@@ -112,8 +112,21 @@
   "left": {
     "title": "Блоки в категориях слева",
     "blocks": ["special-offer", "banner"]
-  },
-  "news":"Новости"
+  }
+}
+```
+
+### Панель блоков с привязанным шаблоном
+
+Структура:
+
+```JSON
+"block_lists": {
+  "left": {
+    "title": "Блоки в категориях слева",
+    "blocks": ["special-offer", "banner"],
+    "block_template": "system-title-and-content"
+  }
 }
 ```
 
@@ -124,12 +137,74 @@
 
 ```JSON
 "blocks": {
-  "Банер": {
+  "banner": {
     "title": "Акции и распродажи",
     "content": "50% на все товары!"
-  },
-  "Tovar-nedeli":"Товар недели",
-  "условия-доставки":"Условия доставки"
+  }
+}
+```
+
+### Блок с привязанным шаблоном
+
+Структура:
+
+```JSON
+"blocks": {
+  "banner": {
+    "title": "Акции и распродажи",
+    "content": "50% на все товары!",
+    "block_template": "system-title-and-content"
+  }
+}
+```
+
+### Блок с кастомным шаблоном
+
+Структура:
+
+```JSON
+"blocks": {
+  "first-slider": {
+    "title": "Акции и распродажи",
+    "heading": "Акции и распродажи",
+    "description": "50% на все товары!",
+    "link": "/page/sale",
+    "block_template": "slider-block"
+  }
+},
+"block_lists": {
+  "index-slider": {
+    "title": "Слайдер",
+    "blocks": ["first-slider"],
+    "block_template": "slider-block"
+  }
+},
+"block_templates": {
+  "slider-block": {
+    "name": "Слайдер",
+    "block_fields": {
+      "link": {
+        "name": "Ссылка",
+        "kind": "text"
+      },
+      "description": {
+        "name": "Контент",
+        "kind": "rich_text"
+      },
+      "heading": {
+        "name": "Заголовок",
+        "kind": "text"
+      },
+      "collection": {
+        "name": "Категория",
+        "kind": "collection"
+      },
+      "image": {
+        "name": "Изображения",
+        "kind": "account_file"
+      }
+    }
+  }
 }
 ```
 
