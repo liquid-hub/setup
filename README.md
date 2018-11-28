@@ -276,6 +276,110 @@
 }
 ```
 
+## Виджеты
+
+Чтобы создать виджет в шаблоне нужно указать следующие данные в setup.json:
+
+`widget_types`
+
+`theme_widgets` -> `widget_lists`
+
+#### widget_types
+
+widget_types отвечает за создание виджета.
+
+widget_types имеет следующие свойства:
+
+`"block_template"`: шаблон блокок которые будут добавляться в виджете
+
+`"name"`: заголовок виджета
+
+`"handle"`: уникальный пермалинк для типов виджетов
+
+`"type"`: "block_list_widget_type"
+
+`"snippet"`: название сниппета который будет привязан к виджету, например - `"widget_shippet.liquid"`. **Сниппет должен присутствовать в теме.**
+
+
+#### widget_lists
+
+widget_lists содержит в себе виджет листы, которые содержат в себе массивы виджетов.
+
+В ликвид доступна переменна `widget_lists` в которой по ключу можно получить массив виджетов.
+
+`widget_lists.index-list.widgets`
+
+```
+{% for widgetDrop in widget_lists.index-list.widgets %}
+  {% widget widgetDrop %}
+{% endfor %}
+```
+
+widget_lists содержит массив объектов с полями:
+
+`"name"`: имя виджет листа (указать уникальное имя на латинице)
+
+`"handle"`: пермалинк виджет листа, используется для доступа в виджетам в ликвид
+
+`"widgets"` массив виджетов
+
+
+#### widgets
+
+В массиве виджетов находятся с объекты с указанным типом виджета и пермалинком панели блоков
+
+`"widget_type"`: тут указывается handle из widget_types
+
+`"data_handle"`: тут пермалинк из block_lists
+
+Структура:
+
+```json
+{
+  "block_lists": {
+    "mainblock": {
+      "block_template": "system-image-and-content",
+      "title": "Наша тестовая панель блоков",
+      "blocks": [
+        "image-text-1"
+      ]
+    }
+  },
+  "blocks": {
+    "image-text-1": {
+      "block_template": "system-image-and-content",
+      "title": "Блок внутри тестового виджета",
+      "content": "Контент внутри тестового виджета",
+      "image": "empty.jpg"
+    }
+  },
+  "theme_widgets": {
+    "widget_lists": [
+        {
+          "name": "index",
+          "handle": "index-list",
+          "widgets": [{
+            "widget_type": "test_handle",
+            "data_handle": "mainblock"
+            }]
+        },
+        {
+          "name": "second",
+          "handle": "second-list",
+          "widgets": []
+        }
+      ],
+      "widget_types": [{
+        "block_template": "system-image-and-content",
+        "name": "Заголовок тестового виджета",
+        "handle": "test_handle",
+        "type": "block_list_widget_type",
+        "snippet": "widget_test_snippet.liquid"
+        }]
+      }
+    }
+```
+
 
 ## Пример файла
 
